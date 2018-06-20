@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <script>
+                var local = localStorage.getItem("session");
+                  if (local === "undefined" || local === null) {
+                   
+                    window.location.href = "../index.html";
+                  }
+            </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+  <meta name="author" content="GeeksLabs">
+  <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+  <link rel="shortcut icon" href="img/favicon.png">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js" integrity="sha256-JG6hsuMjFnQ2spWq0UiaDRJBaarzhFbUxiUTxQDA9Lk=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js" integrity="sha256-XF29CBwU1MWLaGEnsELogU6Y6rcc5nCkhhx89nFMIDQ=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js" integrity="sha256-J2sc79NPV/osLcIpzL3K8uJyAD7T5gaEFKlLDM18oxY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js" integrity="sha256-CfcERD4Ov4+lKbWbYqXD6aFM9M51gN4GUEtDhkWABMo=" crossorigin="anonymous"></script>
+  <script scr="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"></script>
+  <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+  <title>GTS Project</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- bootstrap theme -->
+  <link href="css/bootstrap-theme.css" rel="stylesheet">
+  <!--external css-->
+  <!-- font icon -->
+  <link href="css/elegant-icons-style.css" rel="stylesheet" />
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <!-- full calendar css-->
+  <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+  <link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+  <!-- easy pie chart-->
+  <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
+  <!-- owl carousel -->
+  <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+  <link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="css/fullcalendar.css">
+  <link href="css/widgets.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet" />
+  <link href="css/xcharts.min.css" rel=" stylesheet">
+  <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- container section start -->
+  <section id="container" class="">
+
+    <header class="header dark-bg">
+      <div class="toggle-nav">
+        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+      </div>
+
+      <!--logo start-->
+      <a href="admin.html" class="logo">GTS<span class="lite">KMUTNB</span></a>
+      <!--logo end-->
+
+      <div class="top-nav notification-row">
+        <!-- notificatoin dropdown start-->
+        <ul class="nav pull-right top-menu">
+          <a class="" href="index.html">
+            คุณ <div id="result"></div>
+          <span id="name" class="" onclick="logout()">Logout</span>
+        </a>
+        </ul>
+        <!-- notificatoin dropdown end-->
+      </div>
+    </header>
+    <!--header end-->
+   <!--sidebar start-->
+   <aside>
+      <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu">
+          <li class="active">
+            <a class="" href="analyst.html">
+              <i class="icon_table"></i>
+              <span>แสดงผลการทำงาน</span>
+            </a>
+          </li>
+          <li class="active">
+            <a class="" href="useranalyst.html">
+              <i class="icon_document_alt"></i>
+              <span>ดูข้อมูลผู้ใช้งาน</span>
+            </a>
+          </li>
+          <li class="active">
+            <a class="" href="graphanalyst.html">
+              <i class="icon_piechart"></i>
+              <span>กราฟแสดงผล</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+     <!-- sidebar menu end-->
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+          <div class="col-lg-12">
+            <h3 class="page-header"><i class="icon_document_alt"></i>กราฟแสดงผล</h3>
+            <ol class="breadcrumb">
+              <li><i class="icon_document_alt"></i>กราฟแสดงผล Graph</li>
+            </ol>
+          </div>
+        </div>
+        <!--overview start-->
+
+        <div style="width: 30%" height="40%">
+      <canvas id="myChart1" width="20" height="20"></canvas>
+      <canvas id="myChart2" width="20" height="20"></canvas>
+      <canvas id="myChart3" width="20" height="20"></canvas>
+      <canvas id="myChart4" width="20" height="20"></canvas>
+      <canvas id="myChart5" width="20" height="20"></canvas>
+      </div>
+      <script>
+      window.chartColors = {
+            red: 'rgba(255, 99, 132, 0.2)',
+            orange: 'rgb(255, 159, 64)',
+            yellow: 'rgb(255, 205, 86)',
+            green: 'rgb(4, 214, 11)',
+            blue: 'rgb(54, 162, 235)',
+            purple: 'rgb(153, 102, 255)',
+            grey: 'rgb(231,233,237)'
+          };
+      var touch = [], donTouch = [];
+      var ctx1 = document.getElementById("myChart1").getContext('2d');
+      var myChart1 =  {
+          type: 'bar',
+          data: {
+              labels: ["Touch", "Don't Touch"],
+              datasets: [{
+                  label: '#Check Point01',
+                  data: [ touch[0], donTouch[0] ], 
+                  backgroundColor: [
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 99, 132, 0.2)',
+
+                  ],
+                  borderColor: [
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 99, 132, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero:true
+                      }
+                  }]
+              }
+          }
+      };
+      let tm = setInterval(function(){
+        var ctx1 = document.getElementById("myChart1").getContext('2d');
+        var myChart1 =  {
+            type: 'bar',
+            data: {
+                labels: ["Touch", "Don't Touch"],
+                datasets: [{
+                    label: '#Check Point01',
+                    data: [ touch[0], donTouch[0] ], 
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        };
+        var ctx2 = document.getElementById("myChart2").getContext('2d');
+      var myChart2 =  {
+          type: 'bar',
+          data: {
+              labels: ["Touch", "Don't Touch"],
+              datasets: [{
+                  label: '#Check Point02',
+                  data: [ touch[1], donTouch[1] ],
+                  backgroundColor: [
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 99, 132, 0.2)',
+
+                  ],
+                  borderColor: [
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 99, 132, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero:true
+                      }
+                  }]
+              }
+          }
+      };
+      var ctx3 = document.getElementById("myChart3").getContext('2d');
+      var myChart3 =  {
+          type: 'bar',
+          data: {
+              labels: ["Touch", "Don't Touch"],
+              datasets: [{
+                  label: '#Check Point03',
+                  data: [touch[2], donTouch[2]],
+                  backgroundColor: [
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 99, 132, 0.2)',
+
+                  ],
+                  borderColor: [
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 99, 132, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero:true
+                      }
+                  }]
+              }
+          }
+      };
+      var ctx4 = document.getElementById("myChart4").getContext('2d');
+      var myChart4 =  {
+          type: 'bar',
+          data: {
+              labels: ["Touch", "Don't Touch"],
+              datasets: [{
+                  label: '#Check Point04',
+                  data: [touch[3], donTouch[3]],
+                  backgroundColor: [
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 99, 132, 0.2)',
+
+                  ],
+                  borderColor: [
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 99, 132, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero:true
+                      }
+                  }]
+              }
+          }
+      };
+      var ctx5 = document.getElementById("myChart5").getContext('2d');
+      var myChart5 =  {
+          type: 'bar',
+          data: {
+              labels: ["Touch", "Don't Touch"],
+              datasets: [{
+                  label: '#Check Point05',
+                  data: [touch[4], donTouch[4]],
+                  backgroundColor: [
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 99, 132, 0.2)',
+
+                  ],
+                  borderColor: [
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 99, 132, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero:true
+                      }
+                  }]
+              }
+          }
+      };
+            var ctx1 = document.getElementById('myChart1').getContext('2d');
+            window.myLine = new Chart(ctx1, myChart1);
+            var ctx2 = document.getElementById('myChart2').getContext('2d');
+            window.myLine = new Chart(ctx2, myChart2);
+            var ctx3 = document.getElementById('myChart3').getContext('2d');
+            window.myLine = new Chart(ctx3, myChart3);
+            var ctx4 = document.getElementById('myChart4').getContext('2d');
+            window.myLine = new Chart(ctx4, myChart4);
+            var ctx5 = document.getElementById('myChart5').getContext('2d');
+            window.myLine = new Chart(ctx5, myChart5);
+      },5000);
+      
+      window.onload = function() {
+            var ctx1 = document.getElementById('myChart1').getContext('2d');
+            window.myLine = new Chart(ctx1, myChart1);
+            var ctx2 = document.getElementById('myChart2').getContext('2d');
+            window.myLine = new Chart(ctx2, myChart2);
+            var ctx3 = document.getElementById('myChart3').getContext('2d');
+            window.myLine = new Chart(ctx3, myChart3);
+            var ctx4 = document.getElementById('myChart4').getContext('2d');
+            window.myLine = new Chart(ctx4, myChart4);
+            var ctx5 = document.getElementById('myChart5').getContext('2d');
+            window.myLine = new Chart(ctx5, myChart5);
+          };
+
+              var txt_title,txt_content,txt_img ='';
+              var config = {
+                apiKey: "AIzaSyAzQt8zTPXaL2RT48Z_oLDucPCndXXxmDw",
+                authDomain: "gtslogic.firebaseapp.com",
+                databaseURL: "https://gtslogic.firebaseio.com",
+                projectId: "gtslogic",
+                storageBucket: "gtslogic.appspot.com",
+                messagingSenderId: "754828374672"
+              };
+              firebase.initializeApp(config);
+
+              const dbRefObject = firebase.database().ref("Touch ");
+              dbRefObject.once('value', snap =>{
+                if (snap.exists()){
+                  var data = snap.val();
+                  // Grab the keys to iterate over the object
+                  var keys = Object.keys(data);
+                  console.log(data);
+
+                  for (var i = 0; i < keys.length; i++) {
+                    var k = keys[i];
+                    conuntNum(k);
+                  }
+                }else{
+                  console.log("ERROR");
+                }
+              });
+
+      function conuntNum(node) {
+        const Ref = dbRefObject.child(node);
+        Ref.once('value', snap =>{
+          if (snap.exists()){
+            var data = snap.val();
+            // Grab the keys to iterate over the object
+            var keys = Object.keys(data);
+            touch.push(keys.length);
+            console.log(touch);
+            console.log(Object.values(touch));
+            window.myLine.update();
+          }
+        });
+      }
+      /////////////////////////////////////////
+      const dbRefObject2 = firebase.database().ref("Dot Touch ");
+      dbRefObject2.once('value', snap =>{
+      if (snap.exists()){
+        var data = snap.val();
+        var keys = Object.keys(data);
+        console.log(data);
+
+        for (var i = 0; i < keys.length; i++) {
+          var k = keys[i];
+          conuntNum2(k);
+        }
+      }
+      else{ console.log("ERROR"); }
+      });
+
+      function test(x) { 
+        console.log(x);
+        return x*2;
+       }
+
+      function conuntNum2(node) {
+        const Ref = dbRefObject2.child(node);
+        Ref.once('value', snap =>{
+          
+          if (snap.exists()){
+            var data = snap.val();
+            var keys = Object.keys(data);
+            donTouch.push(keys.length);
+            window.myLine.update();
+            }
+      });
+      }
+      var userId = localStorage.getItem("session");
+      // alert(userId);
+      firebase.database().ref('users/data/' + userId).once('value')
+      .then(function(snapshot) {
+      $("#result").text(snapshot.val().name);
+      });
+      function logout() {
+        localStorage.removeItem("session");
+        window.location.href = "index.html";
+      }
+      setInterval(function(){
+        window.myLine.update();
+      },1000);
+
+     
+   </script>
+</body>
+</html>

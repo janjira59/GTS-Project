@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        var local = localStorage.getItem("session");
+          if (local === "undefined" || local === null) {
+           
+            window.location.href = "../index.html";
+          }
+    </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+  <meta name="author" content="GeeksLabs">
+  <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+  <link rel="shortcut icon" href="img/favicon.png">
+
+  <title>GTS Project</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- bootstrap theme -->
+  <link href="css/bootstrap-theme.css" rel="stylesheet">
+  <!--external css-->
+  <!-- font icon -->
+  <link href="css/elegant-icons-style.css" rel="stylesheet" />
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <!-- full calendar css-->
+  <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+  <link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+  <!-- easy pie chart-->
+  <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
+  <!-- owl carousel -->
+  <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+  <link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="css/fullcalendar.css">
+  <link href="css/widgets.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet" />
+  <link href="css/xcharts.min.css" rel=" stylesheet">
+  <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- container section start -->
+  <section id="container" class="">
+
+    <header class="header dark-bg">
+      <div class="toggle-nav">
+        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+      </div>
+
+      <!--logo start-->
+      <a href="admin.html" class="logo">GTS<span class="lite">KMUTNB</span></a>
+      <!--logo end-->
+
+      <div class="nav search-row" id="top_menu">
+        <!--  search form start -->
+        <ul class="nav top-menu">
+          <li>
+            <form class="navbar-form">
+              <input class="form-control" placeholder="Search" type="text">
+            </form>
+          </li>
+        </ul>
+        <!--  search form end -->
+      </div>
+
+      <div class="top-nav notification-row">
+        <!-- notificatoin dropdown start-->
+        <ul class="nav pull-right top-menu">
+          <a class="" href="index.html">
+            คุณ <div id="result"></div>
+          <span id="name" class="" onclick="logout()">Logout</span>
+        </a>
+        </ul>
+        <!-- notificatoin dropdown end-->
+      </div>
+    </header>
+    <!--header end-->
+      <!--sidebar start-->
+      <aside>
+        <div id="sidebar" class="nav-collapse ">
+          <!-- sidebar menu start-->
+          <ul class="sidebar-menu">
+            <li class="active">
+              <a class="" href="editor.html">
+                <i class="icon_table"></i>
+                <span>แสดงผลการทำงาน</span>
+              </a>
+            </li>
+            <li class="active">
+              <a class="" href="addguardeditor.html">
+                <i class="icon_document_alt"></i>
+                <span>เพิ่มข้อมูลเจ้าหน้าที่รักษาความปลอดภัย</span>
+              </a>
+            </li>
+            <li class="active">
+              <a class="" href="guardeditor.html">
+                <i class="icon_pencil-edit_alt"></i>
+                <span>ดูข้อมูลเจ้าหน้าที่รักษาความปลอดภัย</span>
+              </a>
+            </li>
+            <li class="active">
+              <a class="" href="usereditor.html">
+                <i class="icon_pencil-edit_alt"></i>
+                <span>ดูข้อมูลผู้ใช้งาน</span>
+              </a>
+            </li>
+            <li class="active">
+              <a class="" href="grapheditor.html">
+                <i class="icon_piechart"></i>
+                <span>กราฟแสดงผล</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+      <!-- sidebar menu end-->
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+        <!--overview start-->
+        <div class="row">
+          <div class="col-lg-12">
+            <h3 class="page-header"><i class="icon_document_alt"></i>ลบข้อมูลเจ้าหน้าที่รักษาความปลอดภัย</h3>
+            <ol class="breadcrumb">
+              <li><i class="icon_document_alt"></i>ดูข้อมูลเจ้าหน้าที่รักษาความปลอดภัย Guard</li>
+              <li><i class="icon_document_alt"></i>ลบข้อมูลเจ้าหน้าที่รักษาความปลอดภัย Guard</li>
+            </ol>
+          </div>
+        </div>
+        <h1>Delete Successfull!</h1>
+        <a href="usereditor.html">Back</a>
+        <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+        <script>
+        var config = {
+          apiKey: "AIzaSyAzQt8zTPXaL2RT48Z_oLDucPCndXXxmDw",
+          authDomain: "gtslogic.firebaseapp.com",
+          databaseURL: "https://gtslogic.firebaseio.com",
+          projectId: "gtslogic",
+          storageBucket: "gtslogic.appspot.com",
+          messagingSenderId: "754828374672"
+          };
+          firebase.initializeApp(config);
+          var searchParams = new URLSearchParams(window.location.search);
+          console.log("QueryString",searchParams.get("id"))
+          var database = firebase.database().ref('users/data/'+searchParams.get("id"));
+          console.log("database",database);
+          database.remove();
+          var userId = localStorage.getItem("session");
+              // alert(userId);
+              firebase.database().ref('users/data/' + userId).once('value')
+              .then(function(snapshot) {
+              $("#result").text(snapshot.val().name);
+              });
+              function logout() {
+                localStorage.removeItem("session");
+                window.location.href = "index.html";
+              }
+          </script>
+</body>
+</html>

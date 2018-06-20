@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        var local = localStorage.getItem("session");
+        if (local === "undefined" || local === null) {
+
+            window.location.href = "../index.html";
+        }
+    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js" integrity="sha256-JG6hsuMjFnQ2spWq0UiaDRJBaarzhFbUxiUTxQDA9Lk="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js" integrity="sha256-XF29CBwU1MWLaGEnsELogU6Y6rcc5nCkhhx89nFMIDQ="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js" integrity="sha256-J2sc79NPV/osLcIpzL3K8uJyAD7T5gaEFKlLDM18oxY="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js" integrity="sha256-CfcERD4Ov4+lKbWbYqXD6aFM9M51gN4GUEtDhkWABMo="
+        crossorigin="anonymous"></script>
+    <script scr="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <title>GTS Project</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <!-- full calendar css-->
+    <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+    <link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+    <!-- easy pie chart-->
+    <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+    <link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="css/fullcalendar.css">
+    <link href="css/widgets.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet" />
+    <link href="css/xcharts.min.css" rel=" stylesheet">
+    <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- container section start -->
+    <section id="container" class="">
+
+        <header class="header dark-bg">
+            <div class="toggle-nav">
+                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom">
+                    <i class="icon_menu"></i>
+                </div>
+            </div>
+
+            <!--logo start-->
+            <a href="admin.html" class="logo">GTS
+                <span class="lite">KMUTNB</span>
+            </a>
+            <!--logo end-->
+
+            <div class="top-nav notification-row">
+                <!-- notificatoin dropdown start-->
+                <ul class="nav pull-right top-menu">
+                    <a class="" href="index.html">
+                        คุณ
+                        <div id="result"></div>
+                        <span class="" onclick="logout()">Logout</span>
+                    </a>
+                </ul>
+                <!-- notificatoin dropdown end-->
+            </div>
+        </header>
+        <!--header end-->
+        <!--sidebar start-->
+        <aside>
+                <div id="sidebar" class="nav-collapse ">
+                    <!-- sidebar menu start-->
+                    <ul class="sidebar-menu">
+                        <li class="active">
+                            <a class="" href="admin.html">
+                                <i class="icon_table"></i>
+                                <span>แสดงผลการทำงาน</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a class="" href="adduseradmin.html">
+                                <i class="icon_document_alt"></i>
+                                <span>เพิ่มข้อมูลผู้ใช้งาน</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a class="" href="useradmin.html">
+                                <i class="icon_pencil-edit_alt"></i>
+                                <span>ดูข้อมูลผู้ใช้งาน</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a class="" href="graphadmin.html">
+                                <i class="icon_piechart"></i>
+                                <span>กราฟแสดงผล</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a class="" href="analyst.html">
+                                <i class=""></i>
+                                <span>ดูหน้า User</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a class="" href="editor.html">
+                                <i class=""></i>
+                                <span>ดูหน้า Editor</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+            <!-- sidebar menu end-->
+        <!--main content start-->
+        <section id="main-content">
+            <section class="wrapper">
+                <!--overview start-->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3 class="page-header">
+                            <i class="icon_document_alt"></i>กราฟแสดงผล
+                        </h3>
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="icon_document_alt"></i>กราฟแสดงผล Graph
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!--overview start-->
+                <div style="width: auto;height:auto">
+                    <div id="chart01" style="height: 300px; width: 100%;"></div>
+                    <div id="chart02" style="height: 300px; width: 100%;"></div>
+                    <div id="chart03" style="height: 300px; width: 100%;"></div>
+                    <div id="chart04" style="height: 300px; width: 100%;"></div>
+                    <div id="chart05" style="height: 300px; width: 100%;"></div>
+                </div>
+            </section>
+        </section>
+    </section>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script>
+        function createChart(title, data1, data2, target) {
+            var chart = new CanvasJS.Chart(target, {
+                animationEnabled: true,
+                title: {
+                    text: title
+                },
+                axisX: {
+                    title: "เวลา (ชม)"
+                },
+                axisY: {
+                    title: "สถานะ"
+                },
+                legend: {
+                    cursor: "pointer",
+                    itemclick: toggleDataSeries
+                },
+                axisY: {
+                    maximum: 3,
+                },
+                axisX: {
+                    maximum: 24,
+                },
+                data: [{
+                        type: "scatter",
+                        name: "สแกนบัตร",
+                        showInLegend: true,
+                        toolTipContent: "<span style=\"color:#4F81BC \">{name}</span><br>เวลา: {x}",
+                        dataPoints: data1
+                    },
+                    {
+                        type: "scatter",
+                        name: "ไม่สแกนบัตร",
+                        showInLegend: true,
+                        markerType: "triangle",
+                        toolTipContent: "<span style=\"color:#C0504E \">{name}</span><br>เวลา: {x}",
+                        dataPoints: data2
+                    }
+                ]
+            });
+            chart.render();
+
+            function toggleDataSeries(e) {
+                if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                    e.dataSeries.visible = false;
+                } else {
+                    e.dataSeries.visible = true;
+                }
+                e.chart.render();
+            }
+        }
+
+        var config = {
+            apiKey: "AIzaSyAzQt8zTPXaL2RT48Z_oLDucPCndXXxmDw",
+            authDomain: "gtslogic.firebaseapp.com",
+            databaseURL: "https://gtslogic.firebaseio.com",
+            projectId: "gtslogic",
+            storageBucket: "gtslogic.appspot.com",
+            messagingSenderId: "754828374672"
+        };
+        firebase.initializeApp(config);
+        let db = firebase.database();
+
+        (function () {
+            let dataA = [],
+                dataB = [],
+                dataAis = false,
+                dataBis = false;
+            db.ref("Touch /Check Point 001").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    let childKey = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    if (childData.Time === '' || childData.Time === undefined) {} else {
+                        let time = childData.Time.split(':');
+                        if (time[0] <= 24 && time[0] >= 0) {
+                            let data = {
+                                x: time[0],
+                                y: 2
+                            };
+                            dataA.push(data);
+                        }
+                    }
+                });
+            }).then(function () {
+                dataAis = true;
+            });
+            db.ref("Dot Touch /Check Point 001").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    let childKey = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    if (childData.Time === '' || childData.Time === undefined) {} else {
+                        let time = childData.Time.split(':');
+                        if (time[0] <= 24 && time[0] >= 0) {
+                            let data = {
+                                x: time[0],
+                                y: 1
+                            };
+                            dataB.push(data);
+                        }
+                    }
+                });
+            }).then(function () {
+                dataBis = true;
+            });;
+            let tm = setInterval(function () {
+                if (dataAis && dataBis) {
+                    createChart('แสดงผลการทำงานผ่านการสแกนบัตรเครื่องที่ 1', dataA, dataB, 'chart01');
+                    clearInterval(tm);
+                    console.log(dataA, dataB)
+                }
+            }, 1000 / 60);
+        })();
+
+        (function () {
+            let dataA = [],
+                dataB = [],
+                dataAis = false,
+                dataBis = false;
+            db.ref("Touch /Check Point 002").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    let childKey = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    if (childData.Time === '' || childData.Time === undefined) {} else {
+                        let time = childData.Time.split(':');
+                        if (time[0] <= 24 && time[0] >= 0) {
+                            let data = {
+                                x: time[0],
+                                y: 2
+                            };
+                            dataA.push(data);
+                        }
+                    }
+                });
+            }).then(function () {
+                dataAis = true;
+            });
+            db.ref("Dot Touch /Check Point 002").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    let childKey = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    if (childData.Time === '' || childData.Time === undefined) {} else {
+                        let time = childData.Time.split(':');
+                        if (time[0] <= 24 && time[0] >= 0) {
+                            let data = {
+                                x: time[0],
+                                y: 1
+                            };
+                            dataB.push(data);
+                        }
+                    }
+                });
+            }).then(function () {
+                dataBis = true;
+            });;
+            let tm = setInterval(function () {
+                if (dataAis && dataBis) {
+                    createChart('แสดงผลการทำงานผ่านการสแกนบัตรเครื่องที่ 2', dataA, dataB, 'chart02');
+                    clearInterval(tm);
+                    console.log(dataA, dataB)
+                }
+            }, 1000 / 60);
+        })();
+
+        (function () {
+            let dataA = [],
+                dataB = [],
+                dataAis = false,
+                dataBis = false;
+            db.ref("Touch /Check Point 003").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    let childKey = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    if (childData.Time === '' || childData.Time === undefined) {} else {
+                        let time = childData.Time.split(':');
+                        if (time[0] <= 24 && time[0] >= 0) {
+                            let data = {
+                                x: time[0],
+                                y: 2
+                            };
+                            dataA.push(data);
+                        }
+                    }
+                });
+            }).then(function () {
+                dataAis = true;
+            });
+            db.ref("Dot Touch /Check Point 003").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    let childKey = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    if (childData.Time === '' || childData.Time === undefined) {} else {
+                        let time = childData.Time.split(':');
+                        if (time[0] <= 24 && time[0] >= 0) {
+                            let data = {
+                                x: time[0],
+                                y: 1
+                            };
+                            dataB.push(data);
+                        }
+                    }
+                });
+            }).then(function () {
+                dataBis = true;
+            });;
+            let tm = setInterval(function () {
+                if (dataAis && dataBis) {
+                    createChart('แสดงผลการทำงานผ่านการสแกนบัตรเครื่องที่ 3', dataA, dataB, 'chart03');
+                    clearInterval(tm);
+                    console.log(dataA, dataB)
+                }
+            }, 1000 / 60);
+        })();
+
+        (function () {
+            let dataA = [],
+                dataB = [],
+                dataAis = false,
+                dataBis = false;
+            db.ref("Touch /Check Point 004").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    let childKey = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    if (childData.Time === '' || childData.Time === undefined) {} else {
+                        let time = childData.Time.split(':');
+                        if (time[0] <= 24 && time[0] >= 0) {
+                            let data = {
+                                x: time[0],
+                                y: 2
+                            };
+                            dataA.push(data);
+                        }
+                    }
+                });
+            }).then(function () {
+                dataAis = true;
+            });
+            db.ref("Dot Touch /Check Point 004").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    let childKey = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    if (childData.Time === '' || childData.Time === undefined) {} else {
+                        let time = childData.Time.split(':');
+                        if (time[0] <= 24 && time[0] >= 0) {
+                            let data = {
+                                x: time[0],
+                                y: 1
+                            };
+                            dataB.push(data);
+                        }
+                    }
+                });
+            }).then(function () {
+                dataBis = true;
+            });;
+            let tm = setInterval(function () {
+                if (dataAis && dataBis) {
+                    createChart('แสดงผลการทำงานผ่านการสแกนบัตรเครื่องที่ 4', dataA, dataB, 'chart04');
+                    clearInterval(tm);
+                    console.log(dataA, dataB)
+                }
+            }, 1000 / 60);
+        })();
+
+        (function () {
+            let dataA = [],
+                dataB = [],
+                dataAis = false,
+                dataBis = false;
+            db.ref("Touch /Check Point 005").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    let childKey = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    if (childData.Time === '' || childData.Time === undefined) {} else {
+                        let time = childData.Time.split(':');
+                        if (time[0] <= 24 && time[0] >= 0) {
+                            let data = {
+                                x: time[0],
+                                y: 2
+                            };
+                            dataA.push(data);
+                        }
+                    }
+                });
+            }).then(function () {
+                dataAis = true;
+            });
+            db.ref("Dot Touch /Check Point 005").once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    let childKey = childSnapshot.key;
+                    let childData = childSnapshot.val();
+                    if (childData.Time === '' || childData.Time === undefined) {} else {
+                        let time = childData.Time.split(':');
+                        if (time[0] <= 24 && time[0] >= 0) {
+                            let data = {
+                                x: time[0],
+                                y: 1
+                            };
+                            dataB.push(data);
+                        }
+                    }
+                });
+            }).then(function () {
+                dataBis = true;
+            });;
+            let tm = setInterval(function () {
+                if (dataAis && dataBis) {
+                    createChart('แสดงผลการทำงานผ่านการสแกนบัตรเครื่องที่ 5', dataA, dataB, 'chart05');
+                    clearInterval(tm);
+                    console.log(dataA, dataB)
+                }
+            }, 1000 / 60);
+        })();
+
+        var userId = localStorage.getItem("session");
+        // alert(userId);
+        firebase.database().ref('users/data/' + userId).once('value')
+            .then(function (snapshot) {
+                $("#result").text(snapshot.val().name);
+            });
+
+        function logout() {
+            localStorage.removeItem("session");
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+
+</html>
