@@ -279,7 +279,7 @@
                        thumbnail: thumbnail
                        });
                        alert("แก้ไขข้อมูลสำเร็จ ! ");
-                     ;}
+                     };
                     var userId = localStorage.getItem("session");
                     // alert(userId);
                     firebase.database().ref('users/data/' + userId).once('value')

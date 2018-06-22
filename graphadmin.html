@@ -344,9 +344,41 @@
             });
 
         function logout() {
+            firebase.database().ref('users/data/' + userId).once('value')
+                .then(function (snapshot) {
+                    let val = snapshot.val();
+                    firebase.database().ref().child('users/data/' + userId).set({
+                        name: val.name,
+                        lastname: val.lastname,
+                        position: val.position,
+                        phone: val.phone,
+                        role: val.role,
+                        email: val.email,
+                        password: val.password,
+                        online: getDate(),
+                        thumbnail: val.thumbnail
+                    });
+                });
             localStorage.removeItem("session");
             window.location.href = "index.html";
         }
+        setInterval(function () {
+            firebase.database().ref('users/data/' + userId).once('value')
+                .then(function (snapshot) {
+                    let val = snapshot.val();
+                    firebase.database().ref().child('users/data/' + userId).set({
+                        name: val.name,
+                        lastname: val.lastname,
+                        position: val.position,
+                        phone: val.phone,
+                        role: val.role,
+                        email: val.email,
+                        password: val.password,
+                        online: Date.now(),
+                        thumbnail: val.thumbnail
+                    });
+                });
+        }, 1000);
     </script>
 </body>
 
