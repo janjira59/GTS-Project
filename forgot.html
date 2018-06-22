@@ -134,11 +134,11 @@
   function reset(){
     var email = document.getElementById('email').value;
     firebase.auth().sendPasswordResetEmail(email).then(function(){
-      alert('Password Reset Email Sent!');
+      alert('กรุณาตรวจสอบบัญชี E-mail ของคุณ!');
     }).catch(function(error){
       var errorCode = error.code;
       var errorMessage = error.Message;
-      if(errorCode == 'auth/invalid=email'){
+      if(errorCode == 'auth/invalid = email'){
         alert(errorMessage);
       }else if (errorCode == 'auth/user-not-found'){
         alert(errorMessage);

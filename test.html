@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Sign In</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+</head>
+
+<body class="bg-dark">
+  <h1>Welcome to My Awesome App</h1>
+  <div id="firebaseui-auth-container"></div>
+  <div id="loader">Loading...</div>
+</body>
+<script>
+  var config = {
+    apiKey: "AIzaSyAzQt8zTPXaL2RT48Z_oLDucPCndXXxmDw",
+    authDomain: "gtslogic.firebaseapp.com",
+    databaseURL: "https://gtslogic.firebaseio.com",
+    projectId: "gtslogic",
+    storageBucket: "gtslogic.appspot.com",
+    messagingSenderId: "880346400379"
+  };
+  firebase.initializeApp(config);
+  // Initialize Firebase
+  var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  ui.start('#firebaseui-auth-container', {
+    signInOptions: [
+      firebase.auth.EmailAuthProvider.PROVIDER_ID
+    ],
+    // Other config options...
+  });
+  ui.start('#firebaseui-auth-container', {
+    signInOptions: [
+      {
+        provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        requireDisplayName: false
+      }
+    ]
+  });
+  var uiConfig = {
+    callbacks: {
+      signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+        // User successfully signed in.
+        // Return type determines whether we continue the redirect automatically
+        // or whether we leave that to developer to handle.
+        return true;
+      },
+      uiShown: function() {
+        // The widget is rendered.
+        // Hide the loader.
+        document.getElementById('loader').style.display = 'none';
+      }
+    },
+    // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+    signInFlow: 'popup',
+    signInSuccessUrl: 'index.html',//ãËéãÊèÅÔé§»ÅÒÂ·Ò§ËÅÑ§loginä´éáÅéÇ
+    signInOptions: [
+      // Leave the lines as is for the providers you want to offer your users.
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+      firebase.auth.GithubAuthProvider.PROVIDER_ID,
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      firebase.auth.PhoneAuthProvider.PROVIDER_ID
+    ],
+    // Terms of service url.
+    tosUrl: '<your-tos-url>'//ãËéãÊèÅÔé§¢Í§ Terms of service
+  };
+  ui.start('#firebaseui-auth-container', uiConfig);
+
+  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ...
+  });
+</script>
+
+</html>

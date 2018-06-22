@@ -145,7 +145,7 @@
                       <div class="form-group ">
                         <label for="password" class="control-label col-lg-2">* Password่</label>
                         <div class="col-lg-10">
-                          <input class=" form-control" id="password" name="password" type="password" />
+                          <input class=" form-control" id="password" name="password" type="number" />
                         </div>
                       </div>
                       <div class="form-group ">
@@ -194,11 +194,7 @@
                     storageBucket: "gtslogic.appspot.com",
                     messagingSenderId: "754828374672"
                   };
-                  
-                  // var searchParams = new URLSearchParams(window.location.search);
-                  // console.log("QueryString",searchParams.get("userId"))
-                  // id = userId;
-  
+               
                   firebase.initializeApp(config);
                   var database = firebase.database();
                   var userId = localStorage.getItem("session");

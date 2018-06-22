@@ -234,7 +234,7 @@
                 thumbnail = "https://firebasestorage.googleapis.com/v0/b/"+config["storageBucket"]+"/o/"+file.name+"?alt=media";
             });
                 var dimg;
-                database.ref("users/").once('child_added', function(snapshot){
+                database.ref("users/data/").once('value', function(snapshot){
                       if(snapshot.exists()){
                           var content = '';
                           snapshot.forEach(function(data){
@@ -276,10 +276,15 @@
                        role: role,
                        email: email,
                        password: password,
-                       thumbnail: thumbnail
+                      //  thumbnail: thumbnail
                        });
-                       alert("แก้ไขข้อมูลสำเร็จ ! ");
+<<<<<<< HEAD
+                       alert("ข้อมูลถูกบันทึกแล้ว");
                      ;}
+=======
+                       alert("แก้ไขข้อมูลสำเร็จ ! ");
+                     };
+>>>>>>> b3770471b72e165802ad60ebba0a9c331c3c822f
                     var userId = localStorage.getItem("session");
                     // alert(userId);
                     firebase.database().ref('users/data/' + userId).once('value')

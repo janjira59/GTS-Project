@@ -179,12 +179,12 @@
                           <img src="gs://gtslogic.appspot.com" id="thumbnail"/>
                       </div>
                     </div> -->
-                     <div class="form-group ">
+                     <!-- <div class="form-group ">
                       <label for="pic" class="control-label col-lg-2">* แก้ไขรูปภาพ</label>
                       <div class="col-lg-10">
                           <input type="file" id="fileButton"/>
                       </div>
-                    </div>
+                    </div> -->
                      <div class="form-group">
                        <div class="col-lg-offset-2 col-lg-10">
                          <button class="btn btn-primary" id="add-data" type="submit">บันทึก</button>
@@ -213,7 +213,7 @@
         var database = firebase.database();
         var thumbnail;
         
-        database.ref("guards/").once('child_added', function(snapshot){
+        database.ref("guards/data/").once('value', function(snapshot){
               if(snapshot.exists()){
                 var content = '';
                 snapshot.forEach(function(data){
@@ -246,15 +246,12 @@
                            storageRef.put(file);
                            thumbnail = "https://firebasestorage.googleapis.com/v0/b/"+config["storageBucket"]+"/o/"+file.name+"?alt=media";
                          });
-                       }else{
-                         thumbnail = val.thumbnail;
                        }
                     }
                     });
                     }
                     });
 
-                    console.log("thumbnail",thumbnail);
         document.getElementById("add-data").onclick = function(e) {
           var gid = document.getElementById('gid').value;
           var name = document.getElementById('name').value;
@@ -273,9 +270,9 @@
                 cardid: cardid,
                 address: address,
                 tagid: tagid,
-                thumbnail: thumbnail
+                // thumbnail: thumbnail
                 });
-                alert("แก้ไขสำเร็จ ! ");
+                alert("ข้อมูลถูกบันทึกแล้ว");
                 ;}
 
                 var userId = localStorage.getItem("session");

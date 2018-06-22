@@ -13,7 +13,7 @@
 <body>
   <style>
   body{
-    /* background-image: url("img\bg.jpg"); */
+    /* background-image: src="img\bg.jpg"; */
     /* background-image: image("img\bg.jpg"); */
     /* background: url("img\bg.jpg"); */
     background-color:  #84dcff;
@@ -184,6 +184,10 @@
                   page = 3;
                 }
                 childKey = childSnapshot.key;
+              }
+              if(childData.email === email && childData.password !== password)
+              {
+                alert("กรุณากรอกรหัสผ่านให้ถูกต้อง");
               }
              
             });

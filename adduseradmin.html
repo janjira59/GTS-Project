@@ -50,8 +50,7 @@
       <!--logo start-->
       <a href="admin.html" class="logo">GTS<span class="lite">KMUTNB</span></a>
       <!--logo end-->
-      <div class="nav search-row" id="top_menu">
-      </div>
+     
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
@@ -66,7 +65,7 @@
     <!--header end-->
     <!--sidebar start-->
     <aside>
-        <div id="sidebar" class="nav-collapse ">
+        <div id="sidebar" class="navbar-toggleable">
           <!-- sidebar menu start-->
           <ul class="sidebar-menu">
             <li class="active">
@@ -125,9 +124,9 @@
           <div class="col-lg-12">
             <section class="panel">
               <header class="panel-heading">
-                กรุณากรอกข้อมูล
+                กรุณากรอกข้อมูล (หากไม่มีข้อมูลกรุณาใส่เครื่องหมาย - แทน)
               </header>
-              <div class="panel-body">
+              <div class="panel-body" name="form">
                 <div class="form">
                   <form class="form-validate form-horizontal " id="register_form" method="get" action="">
                     <div class="form-group ">
@@ -172,6 +171,12 @@
                         <input class=" form-control" id="password" name="password" type="password" placeholder="Your Password"/>
                       </div>
                     </div>
+                    <!-- <div class="form-group ">
+                      <label for="cmpassword" class="control-label col-lg-2">* Confirm Password</label>
+                      <div class="col-lg-10">
+                        <input class=" form-control" id="cmpassword" name="cmpassword" type="password" placeholder="Your Password"/>
+                      </div>
+                    </div> -->
                     <div class="form-group ">
                       <label for="role" class="control-label col-lg-2">* สิทธิ์</label>
                       <div class="col-lg-10">
@@ -208,19 +213,20 @@
             </section>
           </div>
         </div>
-        <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-            <!--Configure firebase-->
-            <script>
-             var config = {
-              apiKey: "AIzaSyAzQt8zTPXaL2RT48Z_oLDucPCndXXxmDw",
-              authDomain: "gtslogic.firebaseapp.com",
-              databaseURL: "https://gtslogic.firebaseio.com",
-              projectId: "gtslogic",
-              storageBucket: "gtslogic.appspot.com",
-              messagingSenderId: "754828374672"
-            };
-            firebase.initializeApp(config);
-
+        
+      <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+      <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyAzQt8zTPXaL2RT48Z_oLDucPCndXXxmDw",
+          authDomain: "gtslogic.firebaseapp.com",
+          databaseURL: "https://gtslogic.firebaseio.com",
+          projectId: "gtslogic",
+          storageBucket: "gtslogic.appspot.com",
+          messagingSenderId: "754828374672"
+        };
+        firebase.initializeApp(config);
+      
                var database = firebase.database();
                var userId = localStorage.getItem("session");
 
@@ -245,38 +251,32 @@
                         });
                        //console.log(data);
                       });
-                      // var dbRef = firebase.database().ref();
-                      //   document.getElementById("add-data").onclick = function(e) {
-                      //     e.preventDefault();
-                      //     add();
-                         
-                      //     }
-
-                      // function add(){
+                   
                       document.getElementById("add-data").onclick = function(e) {
                         var name = document.getElementById('name').value;
                         var lastname = document.getElementById('lastname').value;
                         var position = document.getElementById('position').value;
                         var phone = document.getElementById('phone').value;
-                        var role ;
-                        if(document.getElementById('role1').checked == true) role="admin";
-                        else if(document.getElementById('role2').checked == true) role="editor";
-                        else if(document.getElementById('role3').checked == true) role="analyst";
                         var email = document.getElementById('email').value;
                         var password = document.getElementById('password').value;
                         var Password = password;
                         var Email = email;
+                        var role ;
+                        if(document.getElementById('role1').checked == true) role="admin";
+                        else if(document.getElementById('role2').checked == true) role="editor";
+                        else if(document.getElementById('role3').checked == true) role="analyst";
                         var rootRef = firebase.database().ref();
                         var storesRef = rootRef.child('users/data/');
                         var newStoreRef = storesRef.push();
                         console.log(data);
-                        
-                        if(data.indexOf(email) > -1)
-                        {
-                          alert("E-mail นี้มีอยู่ในระบบแล้ว");
-                        }
+
+                          if(data.indexOf(email) > -1)
+                          {
+                            alert("E-mail นี้มีอยู่ในระบบแล้ว");
+                          }
                           else
                           {
+                            
                             newStoreRef.set({
                               name: name,
                               lastname: lastname,
@@ -288,39 +288,19 @@
                               thumbnail: thumbnail
                               });
                               alert("เพิ่มข้อมูลสำเร็จ ! ");
-                              
+                         
                           }
-                           var email = document.getElementById('email').value;
-                          var password = document.getElementById('password').value;
-                          firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-                          // Handle Errors here.
-                          var errorCode = error.code;
-                          var errorMessage = error.message;
-                          if(errorCode == 'auth/weak-password'){
-                            alert("Weak Password");
-                          }else {
-                            alert(errorMessage);
-                          }
-                          console.log(error);
-                        });
+                          firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error){
+                            var errorCode = error.code;
+                            var errorMessage = error.message;
+                            if(errorCode == 'auth/weak-password'){
+                              alert('Weak Password');
+                            }else{
+                              alert(errorMessage);
+                            }
+                          });
                       }
-
-                      // function addAuth(){
-                      //   var email = document.getElementById('email').value;
-                      //   var password = document.getElementById('password').value;
-                      //   firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-                      //     // Handle Errors here.
-                      //     var errorCode = error.code;
-                      //     var errorMessage = error.message;
-                      //     if(errorCode == 'auth/weak-password'){
-                      //       alert("Weak Password");
-                      //     }else {
-                      //       alert(errorMessage);
-                      //     }
-                      //     console.log(error);
-                      //   });
-                      // }
-                       
+                      
                     firebase.database().ref('users/data/' + userId).once('value')
                     .then(function(snapshot) {
                       $("#result").text(snapshot.val().name);
