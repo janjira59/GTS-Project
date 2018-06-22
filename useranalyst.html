@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <script>
-        var local = localStorage.getItem("session");
-          if (local === "undefined" || local === null) {
-           
-            window.location.href = "../index.html";
-          }
-    </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
   <meta name="author" content="GeeksLabs">
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
-
   <title>GTS Project</title>
-
   <!-- Bootstrap CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <!-- bootstrap theme -->
@@ -29,29 +19,24 @@
   <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
   <link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
   <!-- Custom styles -->
-
   <link href="css/widgets.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet" />
   <link href="css/xcharts.min.css" rel=" stylesheet">
   <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
   <!-- container section start -->
   <section id="container" class="">
-
     <header class="header dark-bg">
       <div class="toggle-nav">
         <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
       </div>
-
       <!--logo start-->
       <a href="admin.html" class="logo">GTS<span class="lite">KMUTNB</span></a>
       <!--logo end-->
-
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
@@ -185,33 +170,19 @@
               </div>
             </div>
             <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+            <script src="js/config.js"></script>
               <script>
-                  var config = {
-                    apiKey: "AIzaSyAzQt8zTPXaL2RT48Z_oLDucPCndXXxmDw",
-                    authDomain: "gtslogic.firebaseapp.com",
-                    databaseURL: "https://gtslogic.firebaseio.com",
-                    projectId: "gtslogic",
-                    storageBucket: "gtslogic.appspot.com",
-                    messagingSenderId: "754828374672"
-                  };
-               
-                  firebase.initializeApp(config);
-                  var database = firebase.database();
-                  var userId = localStorage.getItem("session");
-  
                   database.ref("users/data/" + userId).once('value').then(function(snapshot){
                         if(snapshot.exists()){
                           var val = snapshot.val();
-                                  console.log("id",userId);
-                                 
-                                  $("#name").val(val.name) ;
-                                  document.getElementById("lastname").value = val.lastname;
-                                  document.getElementById("position").value = val.position;
-                                  document.getElementById("phone").value = val.phone;
-                                  document.getElementById("email").value = val.email;
-                                  document.getElementById("password").value = val.password;
-                                  document.getElementById("role").value = val.role;
-                                 
+                          console.log("id",userId);
+                          $("#name").val(val.name);
+                          document.getElementById("lastname").value = val.lastname;
+                          document.getElementById("position").value = val.position;
+                          document.getElementById("phone").value = val.phone;
+                          document.getElementById("email").value = val.email;
+                          document.getElementById("password").value = val.password;
+                          document.getElementById("role").value = val.role;
                         }
                   });
   
@@ -223,9 +194,9 @@
                     var email = document.getElementById('email').value;
                     var password = document.getElementById('password').value;
                     var role ;
-                        if(document.getElementById('role1').checked == true) role="admin";
-                        else if(document.getElementById('role2').checked == true) role="editor";
-                        else if(document.getElementById('role3').checked == true) role="analyst";
+                    if(document.getElementById('role1').checked == true) role="admin";
+                    else if(document.getElementById('role2').checked == true) role="editor";
+                    else if(document.getElementById('role3').checked == true) role="analyst";
                     var rootRef = firebase.database().ref('users/data/'+userId);
                     rootRef.set({
                          name: name,
@@ -239,18 +210,6 @@
                          });
                          alert("ข้อมูลถูกบันทึกแล้ว");
                       }
-                  
-                  // alert(userId);
-                  firebase.database().ref('users/data/' + userId).once('value')
-                  .then(function(snapshot) {
-                  $("#result").text(snapshot.val().name);
-                  
-                  console.log(snapshot.val().name);
-                  });
-                  function logout() {
-                    localStorage.removeItem("session");
-                    window.location.href = "index.html";
-                  }
   </script>
 </body>
 </html>

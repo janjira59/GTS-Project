@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +7,7 @@
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
     <link rel="shortcut icon" href="img/favicon.png">
-
     <title>GTS Project</title>
-
     <!-- Bootstrap CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- bootstrap theme -->
@@ -19,11 +16,6 @@
     <!-- font icon -->
     <link href="css/elegant-icons-style.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />
-    <!-- full calendar css-->
-    <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
-    <link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
-    <!-- easy pie chart-->
-    <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
     <!-- owl carousel -->
     <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
     <link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
@@ -40,20 +32,17 @@
 <body>
     <!-- container section start -->
     <section id="container" class="">
-
         <header class="header dark-bg">
             <div class="toggle-nav">
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom">
                     <i class="icon_menu"></i>
                 </div>
             </div>
-
             <!--logo start-->
             <a href="admin.html" class="logo">GTS
                 <span class="lite">KMUTNB</span>
             </a>
             <!--logo end-->
-
             <div class="top-nav notification-row">
                 <!-- notificatoin dropdown start-->
                 <ul class="nav pull-right top-menu">
@@ -122,11 +111,10 @@
                             <i class="icon_document_alt"></i>ดูข้อมูลผู้ใช้งาน</h3>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="icon_table"></i>ดูข้อมูลผู้ใช้งาน User</li>
+                            <i class="icon_table"></i>ดูข้อมูลผู้ใช้งาน User</li>
                         </ol>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-lg-12">
                         <section class="panel">
@@ -150,7 +138,6 @@
                         </section>
                     </div>
                 </div>
-
                 <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
                 <script src="js/config.js"></script>
                 <script>
@@ -192,13 +179,11 @@
                             }
                         });
                     });
-
                     function status(date) {
                         console.log(time - date)
                         return (time - date < 5000) ? '<span style="color:#2ecc71">Online</span>' :
                             '<span style="color:#e74c3c">Offline</span>';
-                    }
-                </script>
+                        }
+</script>
 </body>
-
 </html>

@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <script>
-        var local = localStorage.getItem("session");
-          if (local === "undefined" || local === null) {
-           
-            window.location.href = "../index.html";
-          }
-    </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
   <meta name="author" content="GeeksLabs">
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
-
   <title>GTS Project</title>
-
   <!-- Bootstrap CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <!-- bootstrap theme -->
@@ -26,11 +16,6 @@
   <!-- font icon -->
   <link href="css/elegant-icons-style.css" rel="stylesheet" />
   <link href="css/font-awesome.min.css" rel="stylesheet" />
-  <!-- full calendar css-->
-  <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
-  <link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
-  <!-- easy pie chart-->
-  <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
   <!-- owl carousel -->
   <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
   <link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
@@ -41,24 +26,18 @@
   <link href="css/style-responsive.css" rel="stylesheet" />
   <link href="css/xcharts.min.css" rel=" stylesheet">
   <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 </head>
-
 <body>
   <!-- container section start -->
   <section id="container" class="">
-
     <header class="header dark-bg">
       <div class="toggle-nav">
         <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
       </div>
-
       <!--logo start-->
       <a href="admin.html" class="logo">GTS<span class="lite">KMUTNB</span></a>
       <!--logo end-->
-
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
@@ -111,7 +90,7 @@
                     <i class=""></i>
                     <span>ดูหน้า Editor</span>
                   </a>
-                </li>
+              </li>
           </ul>
         </div>
       </aside>
@@ -123,13 +102,8 @@
         <div class="row">
           <div class="col-lg-12">
             <h3 class="page-header"><i class="icon_pencil-edit_alt"></i>แก้ไขข้อมูลผู้ใช้งาน</h3>
-            <ol class="breadcrumb">
-              <li><i class="icon_pencil-edit_alt"></i>ดูข้อมูลผู้ใช้งาน User</li>
-              <li><i class="icon_pencil-edit_alt"></i>แก้ไขข้อมูลผู้ใช้งาน User</li>
-            </ol>
           </div>
         </div>
-
         <div class="row">
           <div class="col-lg-12">
             <section class="panel">
@@ -212,27 +186,17 @@
             </div>
           </div>
           <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+          <script src="js/config.js"></script>
             <script>
-                var config = {
-                  apiKey: "AIzaSyAzQt8zTPXaL2RT48Z_oLDucPCndXXxmDw",
-                  authDomain: "gtslogic.firebaseapp.com",
-                  databaseURL: "https://gtslogic.firebaseio.com",
-                  projectId: "gtslogic",
-                  storageBucket: "gtslogic.appspot.com",
-                  messagingSenderId: "754828374672"
-                };
                 var searchParams = new URLSearchParams(window.location.search);
                 console.log("QueryString",searchParams.get("id"))
-
-                firebase.initializeApp(config);
-                var database = firebase.database();
                 var fileButton = document.getElementById("fileButton");
                 fileButton.addEventListener('change', function(e){
                 var file = e.target.files[0];
                 var storageRef = firebase.storage().ref(file.name);
                 storageRef.put(file);
                 thumbnail = "https://firebasestorage.googleapis.com/v0/b/"+config["storageBucket"]+"/o/"+file.name+"?alt=media";
-            });
+              });
                 var dimg;
                 database.ref("users/data/").once('value', function(snapshot){
                       if(snapshot.exists()){
@@ -244,7 +208,6 @@
                               get_id = data.getKey();
                               if(get_id == searchParams.get("id")){
                                 console.log("name",val.name);
-                               
                                 document.getElementById("name").value = ""+val.name;
                                 document.getElementById("lastname").value = ""+val.lastname;
                                 document.getElementById("position").value = ""+val.position;
@@ -268,28 +231,18 @@
                   var password = document.getElementById('password').value;
                   var rootRef = firebase.database().ref();
                   var storesRef = rootRef.child('users/data/'+searchParams.get("id"));
-                     storesRef.set({
-                       name: name,
-                       lastname: lastname,
-                       position: position,
-                       phone: phone,
-                       role: role,
-                       email: email,
-                       password: password,
+                    storesRef.set({
+                      name: name,
+                      lastname: lastname,
+                      position: position,
+                      phone: phone,
+                      role: role,
+                      email: email,
+                      password: password,
                       //  thumbnail: thumbnail
-                       });
-                       alert("ข้อมูลถูกบันทึกแล้ว");
-                     };
-                    var userId = localStorage.getItem("session");
-                    // alert(userId);
-                    firebase.database().ref('users/data/' + userId).once('value')
-                    .then(function(snapshot) {
-                    $("#result").text(snapshot.val().name);
-                    });
-                    function logout() {
-                      localStorage.removeItem("session");
-                      window.location.href = "index.html";
-                    }
+                      });
+                      alert("ข้อมูลถูกบันทึกแล้ว");
+                    };
                     $('input[type ="tel"]').on('keypress', function(){
                       if( $(this).val().length > 9){
                         return false;

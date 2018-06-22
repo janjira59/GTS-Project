@@ -114,7 +114,6 @@
   </div>
   <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
 <script>
-  // Initialize Firebase
   var config = {
     apiKey: "AIzaSyAzQt8zTPXaL2RT48Z_oLDucPCndXXxmDw",
     authDomain: "gtslogic.firebaseapp.com",
@@ -122,10 +121,9 @@
     projectId: "gtslogic",
     storageBucket: "gtslogic.appspot.com",
     messagingSenderId: "754828374672"
-  };
-  firebase.initializeApp(config);
-
-  var dbRef = firebase.database().ref();
+};
+firebase.initializeApp(config);
+let database = firebase.database();
       document.getElementById("confirmemail").onclick = function(e) {
         e.preventDefault();
         reset();
@@ -146,7 +144,6 @@
       console.log(error);
     });
   }
-       
 </script>
 </body>
 </html>

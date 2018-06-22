@@ -118,7 +118,6 @@
   </div>
   <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
 <script>
-  // Initialize Firebase
   var config = {
     apiKey: "AIzaSyAzQt8zTPXaL2RT48Z_oLDucPCndXXxmDw",
     authDomain: "gtslogic.firebaseapp.com",
@@ -126,13 +125,11 @@
     projectId: "gtslogic",
     storageBucket: "gtslogic.appspot.com",
     messagingSenderId: "754828374672"
-  };
-  firebase.initializeApp(config);
-
+};
+firebase.initializeApp(config);
+let database = firebase.database();
   var page = 0;
   var role = null;
-  
-      var dbRef = firebase.database().ref();
       document.getElementById("login").onclick = function(e) {
         e.preventDefault();
         handleSignUp();
@@ -144,26 +141,9 @@
           var password = document.getElementById('password').value;
           var warnings = "";
           let check = 'users/data/';
-          
-          // if (warnings != "") {
-          //   console.log(warnings);
-          //   errors.style.display = 'block';
-          //   errors.innerHTML = warnings;
-          // } else {
-          //   errors.style.display = "none";
-          //   firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-          //     errors.style.display = (errors.style.display === "none" || errors.style.display === "") ? "block" : "none";
-          //     console.log(error);
-          //     errors.innerHTML = error + "<br/>";
-          //   });
-          // }
-
           var local = localStorage.getItem("session");
           if (local === "undefined" || local === null) {
-          } else {
-           
-          }
-
+          } else { }
           firebase.database().ref(check).once('value', function(snapshot) {
             let childData, childKey;
             snapshot.forEach(function(childSnapshot) {
@@ -214,7 +194,6 @@
               default :
                 window.location.href = "index.html";
               }
-
         });
         }
 </script>

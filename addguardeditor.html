@@ -2,13 +2,7 @@
 <html lang="en">
 
 <head>
-    <script>
-        var local = localStorage.getItem("session");
-          if (local === "undefined" || local === null) {
-           
-            window.location.href = "../index.html";
-          }
-    </script>
+   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
@@ -22,15 +16,9 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <!-- bootstrap theme -->
   <link href="css/bootstrap-theme.css" rel="stylesheet">
-  <!--external css-->
   <!-- font icon -->
   <link href="css/elegant-icons-style.css" rel="stylesheet" />
   <link href="css/font-awesome.min.css" rel="stylesheet" />
-  <!-- full calendar css-->
-  <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
-  <link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
-  <!-- easy pie chart-->
-  <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
   <!-- owl carousel -->
   <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
   <link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
@@ -47,16 +35,13 @@
 <body>
   <!-- container section start -->
   <section id="container" class="">
-
     <header class="header dark-bg">
       <div class="toggle-nav">
         <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
       </div>
-
       <!--logo start-->
       <a href="editor.html" class="logo">GTS<span class="lite">KMUTNB</span></a>
       <!--logo end-->
-
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
@@ -120,7 +105,6 @@
             </ol>
           </div>
         </div>
-
         <div class="row">
            <div class="col-lg-12">
              <section class="panel">
@@ -193,19 +177,9 @@
               </div>
             </div>
             <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+            <script src="js/config.js"></script>
             <script>
-            var config = {
-              apiKey: "AIzaSyAzQt8zTPXaL2RT48Z_oLDucPCndXXxmDw",
-              authDomain: "gtslogic.firebaseapp.com",
-              databaseURL: "https://gtslogic.firebaseio.com",
-              projectId: "gtslogic",
-              storageBucket: "gtslogic.appspot.com",
-              messagingSenderId: "754828374672"
-              };
-              firebase.initializeApp(config);
-              var database = firebase.database();
               var userId = localStorage.getItem("session");
-
                var fileButton = document.getElementById("fileButton");
                 fileButton.addEventListener('change', function(e){
                 var file = e.target.files[0];
@@ -213,7 +187,6 @@
                 storageRef.put(file);
                 thumbnail = "https://firebasestorage.googleapis.com/v0/b/"+config["storageBucket"]+"/o/"+file.name+"?alt=media";
             });
-
             var data = [];
                     let check = 'guards/data/';
                       firebase.database().ref(check).once('value', function(snapshot){
@@ -221,11 +194,9 @@
                         snapshot.forEach(function(childSnapshot){
                           let childKey = childSnapshot.key;
                           childData = childSnapshot.val();
-
                           console.log(childData.cardid);
                           data.push(childData.cardid);
                         });
-                       //console.log(data);
                       });
 
               document.getElementById("add-data").onclick = function(e) {
@@ -259,18 +230,6 @@
                   alert("เพิ่มข้อมูลสำเร็จ ! ");
                   }
                 }
-    
-                // alert(userId);
-                  firebase.database().ref('users/data/' + userId).once('value')
-                    .then(function(snapshot) {
-                    $("#result").text(snapshot.val().name);
-                  });
-                  
-                  function logout() {
-                    localStorage.removeItem("session");
-                    window.location.href = "index.html";
-                    }
-
                     $('input[type ="tel"]').on('keypress', function(){
                       if( $(this).val().length > 9){
                         return false;

@@ -1,21 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <script>
-        var local = localStorage.getItem("session");
-          if (local === "undefined" || local === null) {
-           
-            window.location.href = "../index.html";
-          }
-    </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
   <meta name="author" content="GeeksLabs">
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
-
   <title>GTS Project</title>
   <!-- Bootstrap CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -25,11 +16,6 @@
   <!-- font icon -->
   <link href="css/elegant-icons-style.css" rel="stylesheet" />
   <link href="css/font-awesome.min.css" rel="stylesheet" />
-  <!-- full calendar css-->
-  <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
-  <link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
-  <!-- easy pie chart-->
-  <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
   <!-- owl carousel -->
   <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
   <link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
@@ -41,9 +27,7 @@
   <link href="css/xcharts.min.css" rel=" stylesheet">
   <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 </head>
-
 <body>
   <!-- container section start -->
   <section id="container" class="">
@@ -51,12 +35,10 @@
       <div class="toggle-nav">
         <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
       </div>
-
       <!--logo start-->
       <a href="editor.html" class="logo">GTS<span class="lite">KMUTNB</span></a>
       <!--logo end-->
       <!-- Example single danger button -->
-
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
         <ul class="nav pull-right top-menu">
@@ -130,7 +112,6 @@
                         <header class="panel-heading">
                             แสดงผลการทำงานผ่านการแตะบัตร
                         </header>
-
                         <div class="pagination"></div>
                         <div class="pagination-warpper"></div>
                     </section>
@@ -143,18 +124,9 @@
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+<script src="js/config.js"></script>
 <!--Configure firebase-->
 <script>
-var txt_title, txt_content, txt_img = '';
-var config = {
-    apiKey: "AIzaSyAzQt8zTPXaL2RT48Z_oLDucPCndXXxmDw",
-    authDomain: "gtslogic.firebaseapp.com",
-    databaseURL: "https://gtslogic.firebaseio.com",
-    projectId: "gtslogic",
-    storageBucket: "gtslogic.appspot.com",
-    messagingSenderId: "754828374672"
-};
-firebase.initializeApp(config);
 let dataArray = [];
 let check = 'guards/data/';
 firebase.database().ref(check).once('value', function (snapshot) {
@@ -297,19 +269,8 @@ $('#Search').on('input', function () {
     }
 
 });
-var userId = localStorage.getItem("session");
-// alert(userId);
-firebase.database().ref('users/data/' + userId).once('value')
-    .then(function (snapshot) {
-        $("#result").text(snapshot.val().name);
-    });
 
-function logout() {
-    localStorage.removeItem("session");
-    window.location.href = "index.html";
-}
 </script>
-
 <!-- print -->
 <script language="javascript" type="text/javascript">
 function printDiv(divID) {
