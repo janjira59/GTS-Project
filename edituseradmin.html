@@ -278,13 +278,8 @@
                        password: password,
                       //  thumbnail: thumbnail
                        });
-<<<<<<< HEAD
                        alert("ข้อมูลถูกบันทึกแล้ว");
-                     ;}
-=======
-                       alert("แก้ไขข้อมูลสำเร็จ ! ");
                      };
->>>>>>> b3770471b72e165802ad60ebba0a9c331c3c822f
                     var userId = localStorage.getItem("session");
                     // alert(userId);
                     firebase.database().ref('users/data/' + userId).once('value')
