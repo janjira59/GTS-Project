@@ -171,33 +171,44 @@
                     };
                     firebase.initializeApp(config);
                     var database = firebase.database();
-                    database.ref("users/").once('child_added', function (snapshot) { //ดึงnode users
-                        if (snapshot.exists()) {
-                            var content = '';
-                            snapshot.forEach(function (data) {
-                                var val = data.val();
-                                console.log("row", data.val());
-                                console.log("title", data.getKey());
-                                content += '<tr>';
-                                content += '<td>' + val.name + ' ' + val.lastname + '</td>';
-                                content += '<td>' + val.email + '</td>';
-                                content += '<td>' + val.phone + '</td>';
-                                content += '<td>' + val.position + '</td>';
-                                content += '<td>' + val.role + '</td>';
-                                content += '<td><a href="' + val.thumbnail +
-                                    '" target="_blank">ดูรูปภาพ</a></td>';
-                                content += '<td>' + status(val.online) + '</td>';
-                                content += '<td><a href="edituseradmin.html?id=' + data.getKey() +
-                                    '" class="btn btn-success"><i class="icon_check_alt2"></i>แก้ไข</a></td>';
-                                content += '<td><a href="deleteuseradmin.html?id=' + data.getKey() +
-                                    '" class="btn btn-danger" onclick="return confirm(' +
-                                    "'ยืนยันการลบ'" + ')";><i class="icon_close_alt2" ></i>ลบ</a></td>';
-                                content += '</tr>';
+                    let time = 0;
+                    firebase.database().ref('TimeCurrent/').update({
+                        time: firebase.database.ServerValue.TIMESTAMP
+                    }).then(function () {
+                        firebase.database().ref('TimeCurrent/').once('value')
+                            .then(function (snapshot) {
+                                time = snapshot.val().time;
                             });
-                            var theDiv = document.getElementById("ex-table");
-                            theDiv.innerHTML += content;
-                        }
+                        database.ref("users/").once('child_added', function (snapshot) { //ดึงnode users
+                            if (snapshot.exists()) {
+                                var content = '';
+                                snapshot.forEach(function (data) {
+                                    var val = data.val();
+                                    console.log("row", data.val());
+                                    console.log("title", data.getKey());
+                                    content += '<tr>';
+                                    content += '<td>' + val.name + ' ' + val.lastname + '</td>';
+                                    content += '<td>' + val.email + '</td>';
+                                    content += '<td>' + val.phone + '</td>';
+                                    content += '<td>' + val.position + '</td>';
+                                    content += '<td>' + val.role + '</td>';
+                                    content += '<td><a href="' + val.thumbnail +
+                                        '" target="_blank">ดูรูปภาพ</a></td>';
+                                    content += '<td>' + status(val.online) + '</td>';
+                                    content += '<td><a href="edituseradmin.html?id=' + data.getKey() +
+                                        '" class="btn btn-success"><i class="icon_check_alt2"></i>แก้ไข</a></td>';
+                                    content += '<td><a href="deleteuseradmin.html?id=' + data.getKey() +
+                                        '" class="btn btn-danger" onclick="return confirm(' +
+                                        "'ยืนยันการลบ'" +
+                                        ')";><i class="icon_close_alt2" ></i>ลบ</a></td>';
+                                    content += '</tr>';
+                                });
+                                var theDiv = document.getElementById("ex-table");
+                                theDiv.innerHTML += content;
+                            }
+                        });
                     });
+
 
                     var userId = localStorage.getItem("session");
                     // alert(userId);
@@ -211,11 +222,10 @@
                         window.location.href = "index.html";
                     }
 
-                    function status( date ){
-                        return (Date.now() - date < 5000)? '<span style="color:#2ecc71">Online</span>': '<span style="color:#e74c3c">Offline</span>'; 
-                    }
-                    function getDate() {
-                        return new Date().toLocaleString();
+                    function status(date) {
+                        console.log(time - date)
+                        return (time - date < 5000) ? '<span style="color:#2ecc71">Online</span>' :
+                            '<span style="color:#e74c3c">Offline</span>';
                     }
                 </script>
 </body>

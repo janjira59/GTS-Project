@@ -363,6 +363,7 @@
             window.location.href = "index.html";
         }
         setInterval(function () {
+            //console.log(firebase.firestore.Timestamp);
             firebase.database().ref('users/data/' + userId).once('value')
                 .then(function (snapshot) {
                     let val = snapshot.val();
@@ -374,7 +375,7 @@
                         role: val.role,
                         email: val.email,
                         password: val.password,
-                        online: Date.now(),
+                        online: firebase.database.ServerValue.TIMESTAMP,
                         thumbnail: val.thumbnail
                     });
                 });
