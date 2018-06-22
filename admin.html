@@ -193,10 +193,9 @@
                 for (x in childData) {
 
                     tagid = childData[x].Tag.replace(/\s/g, '');
-
+                    
                     dataArray.forEach((data) => {
                         if (tagid === data.tagid) {
-                            //console.log(data);
                             val = $('<tr><td>' + childData[x].name + '</td><td>' +
                                 childData[x].Tag +
                                 '</td><td>' + childData[x].Date + '</td><td>' +
