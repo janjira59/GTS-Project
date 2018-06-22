@@ -2,13 +2,6 @@
 <html lang="en">
 
 <head>
-    <script>
-        var local = localStorage.getItem("session");
-        if (local === "undefined" || local === null) {
-
-            window.location.href = "../index.html";
-        }
-    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
@@ -19,9 +12,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script scr="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"></script>
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="js/config.js"></script>
 
     <title>GTS Project</title>
 
@@ -154,17 +148,6 @@
     </section>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script>
-        var config = {
-            apiKey: "AIzaSyAzQt8zTPXaL2RT48Z_oLDucPCndXXxmDw",
-            authDomain: "gtslogic.firebaseapp.com",
-            databaseURL: "https://gtslogic.firebaseio.com",
-            projectId: "gtslogic",
-            storageBucket: "gtslogic.appspot.com",
-            messagingSenderId: "754828374672"
-        };
-        firebase.initializeApp(config);
-        let db = firebase.database();
-
         let uniqueKey = (data, name) => {
             let unique = [],
                 tmp;
@@ -191,7 +174,7 @@
                 unday = [],
                 dataAis = false,
                 dataBis = false;
-            db.ref("Touch ").once('value', function (snapshot) {
+                database.ref("Touch ").once('value', function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
                     let childData = childSnapshot.val();
                     touch.push(childData);
@@ -203,7 +186,7 @@
                 }
                 dataAis = true;
             });
-            db.ref("Dot Touch ").once('value', function (snapshot) {
+            database.ref("Dot Touch ").once('value', function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
                     let childData = childSnapshot.val();
                     untouch.push(childData);
@@ -336,50 +319,7 @@
                 1000 / 60);
         })();
 
-        var userId = localStorage.getItem("session");
-        // alert(userId);
-        firebase.database().ref('users/data/' + userId).once('value')
-            .then(function (snapshot) {
-                $("#result").text(snapshot.val().name);
-            });
-
-        function logout() {
-            firebase.database().ref('users/data/' + userId).once('value')
-                .then(function (snapshot) {
-                    let val = snapshot.val();
-                    firebase.database().ref().child('users/data/' + userId).set({
-                        name: val.name,
-                        lastname: val.lastname,
-                        position: val.position,
-                        phone: val.phone,
-                        role: val.role,
-                        email: val.email,
-                        password: val.password,
-                        online: getDate(),
-                        thumbnail: val.thumbnail
-                    });
-                });
-            localStorage.removeItem("session");
-            window.location.href = "index.html";
-        }
-        setInterval(function () {
-            //console.log(firebase.firestore.Timestamp);
-            firebase.database().ref('users/data/' + userId).once('value')
-                .then(function (snapshot) {
-                    let val = snapshot.val();
-                    firebase.database().ref().child('users/data/' + userId).set({
-                        name: val.name,
-                        lastname: val.lastname,
-                        position: val.position,
-                        phone: val.phone,
-                        role: val.role,
-                        email: val.email,
-                        password: val.password,
-                        online: firebase.database.ServerValue.TIMESTAMP,
-                        thumbnail: val.thumbnail
-                    });
-                });
-        }, 1000);
+        
     </script>
 </body>
 
