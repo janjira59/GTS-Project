@@ -120,49 +120,49 @@
                     <div class="form-group ">
                         <label for="idna" class="control-label col-lg-2">* รหัสบัตรประชาชน</label>
                         <div class="col-lg-10">
-                          <input class=" form-control" id="idna" name="idna" type="text" placeholder="Your ID Card"/>
+                          <input class=" form-control" id="idna" name="idna" type="text" placeholder="กรุณากรอกรหัสประชาชน"/>
                         </div>
                       </div>
                     <div class="form-group ">
                       <label for="name" class="control-label col-lg-2">* ชื่อจริง</label>
                       <div class="col-lg-10">
-                        <input class=" form-control" id="name" name="fullname" type="text" placeholder="Your Name"/>
+                        <input class=" form-control" id="name" name="fullname" type="text" placeholder="กรุณากรอกชื่อจริง"/>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="lastname" class="control-label col-lg-2">* นามสกุล</label>
                       <div class="col-lg-10">
-                        <input class=" form-control" id="lastname" name="lasname" type="text" placeholder="Your lastName"/>
+                        <input class=" form-control" id="lastname" name="lasname" type="text" placeholder="กรุณากรอกนามสกุล"/>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="phone" class="control-label col-lg-2">* เบอร์โทรศัพท์</label>
                       <div class="col-lg-10">
-                        <input class=" form-control" id="phone" name="phone" type="tel" placeholder="Your Telephone Number"/>
+                        <input class=" form-control" id="phone" name="phone" type="tel" placeholder="กรุณากรอกเบอร์โทรศัพท์"/>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="position" class="control-label col-lg-2">* ตำแหน่ง</label>
                       <div class="col-lg-10">
-                        <input class=" form-control" id="position" name="position" type="text" placeholder="Your Position"/>
+                        <input class=" form-control" id="position" name="position" type="text" placeholder="กรุณากรอกตำแหน่ง"/>
                       </div>
                     </div>
                     <div class="form-group ">
-                      <label for="online" class="control-label col-lg-2">online</label>
+                      <label for="online" class="control-label col-lg-2">สถานะ</label>
                       <div class="col-lg-10">
-                        <input class=" form-control" id="online" name="online" type="online" placeholder="Your E-mail" display="none"/>
+                        <input class=" form-control" id="online" name="online" type="online" placeholder="ละเว้นช่องนี้"  readonly/>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="email" class="control-label col-lg-2">* E-mail</label>
                       <div class="col-lg-10">
-                        <input class=" form-control" id="email" name="email" type="email" placeholder="Your E-mail"/>
+                        <input class=" form-control" id="email" name="email" type="email" placeholder="กรุณากรอก E-mail"/>
                       </div>
                     </div>
                     <div class="form-group ">
                       <label for="password" class="control-label col-lg-2">* Password</label>
                       <div class="col-lg-10">
-                        <input class=" form-control" id="password" name="password" type="password" placeholder="Your Password"/>
+                        <input class=" form-control" id="password" name="password" type="password" placeholder="กรุณากรอกรหัสผ่าน"/>
                       </div>
                     </div>
                     <!-- <div class="form-group ">
@@ -237,6 +237,7 @@
           var email = document.getElementById('email').value;
           var password = document.getElementById('password').value;
           var online = document.getElementById('online').value;
+          var idna = document.getElementById('idna').value;
           var Password = password;
           var Email = email;
           var role ;
@@ -253,6 +254,7 @@
           }else{
             newStoreRef.set({
               name: name,
+              idna: idna,
               lastname: lastname,
               position: position,
               phone: phone,
@@ -269,9 +271,9 @@
             var errorMessage = error.message;
             if(errorCode == 'auth/weak-password')
             {
-              alert('Weak Password');
+              alert('รหัสผ่านมีความยาวต้องมากกว่า 6 ตัวอักษร');
             }else{
-              alert(errorMessage);
+              // alert(errorMessage);
             }
           });
         }

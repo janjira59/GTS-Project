@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        var local = localStorage.getItem("session");
+          if (local === "undefined" || local === null) {
+           
+            window.location.href = "../index.html";
+          }
+    </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
@@ -90,7 +97,7 @@
                     <i class=""></i>
                     <span>ดูหน้า Editor</span>
                   </a>
-              </li>
+                </li>
           </ul>
         </div>
       </aside>
@@ -107,13 +114,32 @@
         <h1>ลบข้อมูลสำเร็จ!</h1>
         <a href="useradmin.html">กลับ</a>
         <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-        <script src="js/config.js"></script>
         <script>
+        var config = {
+          apiKey: "AIzaSyAzQt8zTPXaL2RT48Z_oLDucPCndXXxmDw",
+          authDomain: "gtslogic.firebaseapp.com",
+          databaseURL: "https://gtslogic.firebaseio.com",
+          projectId: "gtslogic",
+          storageBucket: "gtslogic.appspot.com",
+          messagingSenderId: "754828374672"
+          };
+          firebase.initializeApp(config);
           var searchParams = new URLSearchParams(window.location.search);
           console.log("QueryString",searchParams.get("id"))
           var database = firebase.database().ref('users/data/'+searchParams.get("id"));
           console.log("database",database);
           database.remove();
-</script>
+          
+          var userId = localStorage.getItem("session");
+              // alert(userId);
+              firebase.database().ref('users/data/' + userId).once('value')
+              .then(function(snapshot) {
+              $("#result").text(snapshot.val().name);
+              });
+              function logout() {
+                localStorage.removeItem("session");
+                window.location.href = "index.html";
+              }
+          </script>
 </body>
 </html>

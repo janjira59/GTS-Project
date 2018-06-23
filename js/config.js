@@ -32,6 +32,7 @@ setInterval(function () {
             let val = snapshot.val();
             firebase.database().ref().child('users/data/' + userId).set({
                 name: val.name,
+                idna: val.idna,
                 lastname: val.lastname,
                 position: val.position,
                 phone: val.phone,

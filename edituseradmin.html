@@ -114,11 +114,17 @@
                 <div class="form">
                   <form class="form-validate form-horizontal " id="register_form" method="get" action="">
                     <div class="form-group ">
-                      <label for="name" class="control-label col-lg-2">* ชื่อจริง</label>
-                      <div class="col-lg-10">
-                        <input class=" form-control" id="name" name="fullname" type="text" />
+                      <label for="idna" class="control-label col-lg-2">* รหัสบัตรประชาชน</label>
+                        <div class="col-lg-10">
+                          <input class=" form-control" id="idna" name="idna" type="text" />
                       </div>
                     </div>
+                    <div class="form-group ">
+                      <label for="name" class="control-label col-lg-2">* ชื่อจริง</label>
+                        <div class="col-lg-10">
+                          <input class=" form-control" id="name" name="fullname" type="text" />
+                        </div>
+                      </div>
                     <div class="form-group ">
                       <label for="lastname" class="control-label col-lg-2">* นามสกุล</label>
                       <div class="col-lg-10">
@@ -135,6 +141,12 @@
                       <label for="position" class="control-label col-lg-2">* ตำแหน่ง</label>
                       <div class="col-lg-10">
                         <input class=" form-control" id="position" name="position" type="text" />
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label for="online" class="control-label col-lg-2">สถานะ</label>
+                      <div class="col-lg-10">
+                        <input class=" form-control" id="online" name="online" type="online" placeholder="ละเว้นช่องนี้" />
                       </div>
                     </div>
                     <div class="form-group ">
@@ -207,13 +219,15 @@
                               console.log("id",data.getKey());
                               get_id = data.getKey();
                               if(get_id == searchParams.get("id")){
-                                console.log("name",val.name);
+                                console.log("name",val.name);idna
+                                document.getElementById("idna").value = ""+val.idna;
                                 document.getElementById("name").value = ""+val.name;
                                 document.getElementById("lastname").value = ""+val.lastname;
                                 document.getElementById("position").value = ""+val.position;
                                 document.getElementById("phone").value = ""+val.phone;
                                 document.getElementById("email").value = ""+val.email;
                                 document.getElementById("password").value = ""+val.password;
+                                document.getElementById("role").value = ""+val.role;
                               }
                           });
                       }
@@ -223,6 +237,8 @@
                   var lastname = document.getElementById('lastname').value;
                   var position = document.getElementById('position').value;
                   var phone = document.getElementById('phone').value;
+                  var online = document.getElementById('online').value;
+                  var idna = document.getElementById('idna').value;
                   var role ;
                   if(document.getElementById('role1').checked == true) role="admin";
                   else if(document.getElementById('role2').checked == true) role="editor";
@@ -233,10 +249,12 @@
                   var storesRef = rootRef.child('users/data/'+searchParams.get("id"));
                     storesRef.set({
                       name: name,
+                      idna: idna,
                       lastname: lastname,
                       position: position,
                       phone: phone,
                       role: role,
+                      online: online,
                       email: email,
                       password: password,
                       //  thumbnail: thumbnail
@@ -249,13 +267,12 @@
                       }
                     });
                     console.log($('input[type ="tel"]'));
-
-                    $('input[type ="naid"]').on('keypress',function(){
+                    $('input[name ="idna"]').on('keypress',function(){
                       if($(this).val().length > 12){
                         return false;
                       }
                     });
-                    console.log($('input[type = "naid"]'));
+                    console.log($('input[name ="idna"]'));
 </script>
 </body>
 </html>
