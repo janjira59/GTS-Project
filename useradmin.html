@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <script>
-                var local = localStorage.getItem("session");
-                  if (local === "undefined" || local === null) {
-                   
-                    window.location.href = "../index.html";
-                  }
-            </script>
+    <script>
+    var local = localStorage.getItem("session");
+        if (local === "undefined" || local === null) {
+         window.location.href = "../index.html";
+        }
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
@@ -157,7 +156,7 @@
                             .then(function (snapshot) {
                                 time = snapshot.val().time;
                             });
-                        database.ref("users/").once('child_added', function (snapshot) { //ดึงnode users
+                        database.ref("users/").once('child_added', function (snapshot) { //ดึงusers
                             if (snapshot.exists()) {
                                 var content = '';
                                 snapshot.forEach(function (data) {
@@ -175,10 +174,12 @@
                                     content += '<td>' + status(val.online) + '</td>';
                                     content += '<td><a href="edituseradmin.html?id=' + data.getKey() +
                                         '" class="btn btn-success"><i class="icon_check_alt2"></i>แก้ไข</a></td>';
-                                    content += '<td><a href="deleteuseradmin.html?id=' + data.getKey() +
+                                    if(status(val.online) === '<span style="color:#e74c3c">Offline</span>' ){
+                                        content += '<td><a href="deleteuseradmin.html?id=' + data.getKey() +
                                         '" class="btn btn-danger" onclick="return confirm(' +
                                         "'ยืนยันการลบ'" +
                                         ')";><i class="icon_close_alt2" ></i>ลบ</a></td>';
+                                    }
                                     content += '</tr>';
                                 });
                                 var theDiv = document.getElementById("ex-table");
@@ -190,9 +191,7 @@
                         console.log(time - date)
                         return (time - date < 5000) ? '<span style="color:#2ecc71">Online</span>' :
                             '<span style="color:#e74c3c">Offline</span>';
-                            if(status(val.online) == Online ){
-
-                            }
+                           
                         }
 </script>
 </body>
