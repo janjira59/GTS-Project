@@ -3,6 +3,7 @@ if (local === "undefined" || local === null) {
 
     window.location.href = "../index.html";
 }
+// && role.val == null
 var config = {
     apiKey: "AIzaSyAzQt8zTPXaL2RT48Z_oLDucPCndXXxmDw",
     authDomain: "gtslogic.firebaseapp.com",

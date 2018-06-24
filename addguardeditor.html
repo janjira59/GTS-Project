@@ -110,46 +110,40 @@
                   <div class="form">
                     <form class="form-validate form-horizontal " id="register_form" method="get" action="">
                       <div class="form-group ">
-                        <label for="gid" class="control-label col-lg-2">* รหัสประจำตัว</label>
-                        <div class="col-lg-10">
-                          <input class=" form-control" id="gid" name="id" type="text" placeholder="Your ID"/>
-                        </div>
-                      </div>
-                      <div class="form-group ">
                         <label for="idna" class="control-label col-lg-2">* รหัสบัตรประชาชน</label>
                         <div class="col-lg-10">
-                          <input class=" form-control" id="idna" name="idn" type="naid" placeholder="Your National ID Card"/>
+                          <input class=" form-control" id="idna" name="idn" type="naid" placeholder="กรุณากรอกรหัสประชาชน"/>
                         </div>
                       </div>
                       <div class="form-group ">
                         <label for="tagid" class="control-label col-lg-2">* Tag ID</label>
                         <div class="col-lg-10">
-                          <input class=" form-control" id="tagid" name="tag" type="text" placeholder="TAG ID"/>
+                          <input class=" form-control" id="tagid" name="tag" type="text" placeholder="กรุณากรอกเลข TAG"/>
                         </div>
                       </div>
                       <div class="form-group ">
                         <label for="name" class="control-label col-lg-2">* ชื่อจริง</label>
                         <div class="col-lg-10">
-                          <input class=" form-control" id="name" name="fullname" type="text" placeholder="Your Name"/>
+                          <input class=" form-control" id="name" name="fullname" type="text" placeholder="กรุณากรอกชื่อจริง"/>
                         </div>
                       </div>
                       <div class="form-group ">
                         <label for="lastname" class="control-label col-lg-2">* นามสกุล</label>
                         <div class="col-lg-10">
-                          <input class=" form-control" id="lastname" name="lasname" type="text" placeholder="Your lastName"/>
+                          <input class=" form-control" id="lastname" name="lasname" type="text" placeholder="กรุณากรอกนามสกุล"/>
                         </div>
                       </div>
                       <div class="form-group ">
                         <label for="phone" class="control-label col-lg-2">* เบอร์โทรศัพท์</label>
                         <div class="col-lg-10">
-                          <input class=" form-control" id="phone" name="tel" type="tel" placeholder="Your Telephone Number"/>
+                          <input class=" form-control" id="phone" name="tel" type="tel" placeholder="กรุณากรอกเบอร์โทรศัพท์"/>
                         </div>
                       </div>
                       
                       <div class="form-group ">
                         <label for="address" class="control-label col-lg-2">* ที่อยู่</label>
                         <div class="col-lg-10">
-                          <textarea class="form-control" rows="3" id="address" name="add"  placeholder="Your Address"/></textarea>
+                          <textarea class="form-control" rows="3" id="address" name="add"  placeholder="กรุณากรอกที่อยู่"/></textarea>
                          </div>
                         </div>
                         <div class="form-group ">
@@ -195,7 +189,6 @@
                       });
 
               document.getElementById("add-data").onclick = function(e) {
-                var gid = document.getElementById('gid').value;
                 var tagid = document.getElementById('tagid').value;
                 var name = document.getElementById('name').value;
                 var lastname = document.getElementById('lastname').value;
@@ -213,14 +206,13 @@
                 else
                 {
                 newStoreRef.set({
-                  gid: gid,
                   tagid: tagid,
                   name: name,
                   lastname: lastname,
                   tel: tel,
                   cardid: cardid,
                   address: address,
-                  // thumbnail: thumbnail
+                  thumbnail: thumbnail
                   });
                   alert("เพิ่มข้อมูลสำเร็จ ! ");
                   }

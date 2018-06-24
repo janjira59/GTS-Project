@@ -257,7 +257,7 @@
             }
             if(password.length >4 ){
             newStoreRef.set({
-                name: name,
+              name: name,
               idna: idna,
               lastname: lastname,
               position: position,
@@ -271,18 +271,19 @@
             alert("เพิ่มข้อมูลสำเร็จ ! ");
           }
           }
-          
-        }
-        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error){
+
+          firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error){
             var errorCode = error.code;
             var errorMessage = error.message;
-            if(errorCode == 'auth/weak-password')
-            {
-              alert('รหัสผ่านมีความยาวต้องมากกว่า 6 ตัวอักษร');
-            }else{
-              alert(errorMessage);
-            }
+            // if(errorCode == 'auth/weak-password')
+            // {
+            //   alert('รหัสผ่านมีความยาวต้องมากกว่า 6 ตัวอักษร');
+            // }else{
+            //   alert(errorMessage);
+            // }
           });
+        }
+        
          firebase.database().ref('users/data/' + userId).once('value').then(function(snapshot) {
            $("#result").text(snapshot.val().name);
            console.log(snapshot.val().name);
@@ -292,8 +293,8 @@
               return false;
             }
           });
-          console.log($('input[type ="tel"]'));
-          $('input[name ="idna"]').on('keypress',function(){
+           console.log($('input[type ="tel"]'));
+           $('input[name ="idna"]').on('keypress',function(){
             if($(this).val().length > 12){
               return false;
             }

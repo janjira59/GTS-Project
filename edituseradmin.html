@@ -146,7 +146,7 @@
                     <!-- <div class="form-group "> -->
                       <!-- <label for="online" class="control-label col-lg-2">สถานะ</label> -->
                       <!-- <div class="col-lg-10"> -->
-                        <input class=" form-control" id="online" name="online" type="hidden" placeholder="ละเว้นช่องนี้"  readonly/>
+                        <input class=" form-control" id="online" name="online" type="hidden" readonly/>
                       <!-- </div> -->
                     <!-- </div> -->
                     <div class="form-group ">
@@ -164,16 +164,23 @@
                     <div class="form-group ">
                         <label for="role" class="control-label col-lg-2">* สิทธิ์</label>
                         <div class="col-lg-10">
+                          <input class=" form-control" id="role" name="role" type="text" />
+                        </div>
+                      </div>
+                      <form name="myform">
+                    <div class="form-group ">
+                        <label for="role" class="control-label col-lg-2">* สิทธิ์</label>
+                        <div class="col-lg-10">                              
                           <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="role1">
-                            <input type="radio" id="role1" class="mdl-radio__button" name="role" value="admin" >
+                            <input type="radio" id="role1" class="mdl-radio__button" name="role" value="admin">
                             <span class="mdl-radio__label">admin</span>
                           </label>
                           <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="role2">
-                            <input type="radio" id="role2" class="mdl-radio__button" name="role" value="editor" >
+                            <input type="radio" id="role2" class="mdl-radio__button" name="role" value="editor">
                             <span class="mdl-radio__label">editor</span>
                           </label>
                           <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="role3">
-                            <input type="radio" id="role3" class="mdl-radio__button" name="role" value="analyst" >
+                            <input type="radio" id="role3" class="mdl-radio__button" name="role" value="analyst">
                               <span class="mdl-radio__label">analyst</span>
                             </label>
                           </div>
@@ -191,6 +198,7 @@
                           <button class="btn btn-default" type="button"><a href="useradmin.html">ยกเลิก</a></button>
                         </div>
                       </div>
+                    </form>
                     </form>
                   </div>
                 </div>
@@ -225,14 +233,19 @@
                                 document.getElementById("lastname").value = ""+val.lastname;
                                 document.getElementById("position").value = ""+val.position;
                                 document.getElementById("phone").value = ""+val.phone;
-                                // document.getElementById("online").value = ""+val.online;
                                 document.getElementById("email").value = ""+val.email;
                                 document.getElementById("password").value = ""+val.password;
-                                document.getElementById("role").value = ""+val.role;
+                                r = document.getElementById("role").value = ""+val.role; 
+                                // document.querySelector("input[role]:checked").value;
+                                document.getElementById("thumbnail").value = ""+val.thumbnail; 
                               }
                           });
                       }
-                });
+                      if(role == "analyst")
+                      {
+                        role.checked=true;
+                      }
+                });         
                 document.getElementById("add-data").onclick = function(e) {
                   var name = document.getElementById('name').value;
                   var lastname = document.getElementById('lastname').value;
@@ -248,7 +261,7 @@
                   var password = document.getElementById('password').value;
                   var rootRef = firebase.database().ref();
                   var storesRef = rootRef.child('users/data/'+searchParams.get("id"));
-                    storesRef.set({
+                  storesRef.set({
                       name: name,
                       idna: idna,
                       lastname: lastname,
@@ -262,6 +275,7 @@
                       });
                       alert("ข้อมูลถูกบันทึกแล้ว");
                     };
+                    
                     $('input[type ="tel"]').on('keypress', function(){
                       if( $(this).val().length > 9){
                         return false;
