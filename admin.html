@@ -117,6 +117,11 @@
                                 <input class="form-control" placeholder="Search" id="Search" type="text">
                             </form>
                         </li>
+                        <li>
+                            <form class="navbar-default">
+                                    <a class="btn btn-warning btn-lg" href="adminprint.html">รายงานผลก่อนการพิมพ์</a>
+                            </form>
+                        </li>
                     </ul>
                 </div>
                 <div class="row" id="row1">
@@ -130,7 +135,6 @@
                         </section>
                     </div>
                 </div>
-                <a class="btn btn-warning btn-lg" onclick="javascript:printDiv('row1')">พิมพ์</a>
             </section>
         </section>
     </section>
@@ -283,17 +287,5 @@
 
     });
    
-</script>
-<!-- print -->
-<script language="javascript" type="text/javascript">
-    function printDiv(divID) {
-        var divElements = document.getElementById(divID).innerHTML;
-        var oldPage = document.body.innerHTML;
-        document.body.innerHTML =
-            "<html><head><title></title></head><body>" +
-            divElements + "</body>";
-        window.print();
-        document.body.innerHTML = oldPage;
-    }
 </script>
 </html>

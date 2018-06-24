@@ -150,6 +150,7 @@ let database = firebase.database();
               //childKey = childSnapshot.key;
               childData = childSnapshot.val();
 
+              // if(status(val.online) === time - date < 5000 ){
                if( childData.email === email && childData.password === password ){
                 if( childData.role === "admin")
                 {
@@ -169,6 +170,7 @@ let database = firebase.database();
               {
                 alert("กรุณากรอกรหัสผ่านให้ถูกต้อง");
               }
+            // }
              
             });
             console.log(page);
@@ -195,6 +197,11 @@ let database = firebase.database();
                 window.location.href = "index.html";
               }
         });
+        }
+        function status(date) {
+          console.log(time - date)
+          return (time - date < 5000) ? '<span style="color:#2ecc71">Online</span>' :
+          '<span style="color:#e74c3c">Offline</span>';
         }
 </script>
 </body>
